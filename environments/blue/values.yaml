@@ -1,0 +1,5 @@
+color: blue
+replicaCount: 4
+image:
+  repository: eyesoncloud/web-app
+  tag: v1
