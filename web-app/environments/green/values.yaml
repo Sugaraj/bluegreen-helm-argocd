@@ -3,3 +3,6 @@ replicaCount: 4
 image:
   repository: eyesoncloud/web-app
   tag: v2
+
+ingress:
+  enabled: false
