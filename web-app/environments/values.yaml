@@ -1,6 +1,6 @@
-containerPort: 80
+containerPort: 80  # Must match the container port in Deployment
 
-serviceSelectorColor: green
+serviceSelectorColor: green  # switch to 'blue' or 'green' to change traffic
 
 service:
   type: NodePort
