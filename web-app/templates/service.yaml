@@ -4,6 +4,7 @@ metadata:
   name: blue-green-service
   labels:
     app: blue-webserver
+  namespace: blue-green-app
 spec:
   type: NodePort
   selector:
