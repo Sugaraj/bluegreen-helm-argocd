@@ -2,8 +2,7 @@ serviceSelectorColor: blue
 
 service:
   type: NodePort
-  port: 80
-  targetPort: 8080
+  port: 8080
   nodePort: 30010
 
 blue:
@@ -14,6 +13,10 @@ blue:
   extraVolumeMounts:
     - name: nginx-temp
       mountPath: /var/cache/nginx
+  securityContext:
+    runAsUser: 1001
+    runAsGroup: 0
+    fsGroup: 1001
   volumes:
     - name: nginx-temp
       emptyDir: {}
@@ -26,6 +29,10 @@ green:
   extraVolumeMounts:
     - name: nginx-temp
       mountPath: /var/cache/nginx
+  securityContext:
+    runAsUser: 1001
+    runAsGroup: 0
+    fsGroup: 1001
   volumes:
     - name: nginx-temp
       emptyDir: {}
