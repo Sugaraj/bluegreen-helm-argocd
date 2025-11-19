@@ -5,7 +5,13 @@ blue:
     tag: v1
   ingress:
     enabled: false
-
+  securityContext:
+    runAsUser: 1001         
+    runAsGroup: 0
+    fsGroup: 1001           
+  extraVolumeMounts:
+    - name: nginx-temp
+      mountPath: /var/cache/nginx
 green:
   replicaCount: 3
   image:
@@ -13,9 +19,20 @@ green:
     tag: v2
   ingress:
     enabled: false
+  securityContext:
+    runAsUser: 1001
+    runAsGroup: 0
+    fsGroup: 1001
+  extraVolumeMounts:
+    - name: nginx-temp
+      mountPath: /var/cache/nginx
 
 serviceSelectorColor: blue
 service:
   type: NodePort
   nodePort: 30010
   port: 80
+
+volumes:
+  - name: nginx-temp
+    emptyDir: {} 
