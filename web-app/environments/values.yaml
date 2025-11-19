@@ -13,10 +13,6 @@ blue:
   extraVolumeMounts:
     - name: nginx-temp
       mountPath: /var/cache/nginx
-  securityContext:
-    runAsUser: 1001
-    runAsGroup: 0
-    fsGroup: 1001
   volumes:
     - name: nginx-temp
       emptyDir: {}
@@ -29,10 +25,6 @@ green:
   extraVolumeMounts:
     - name: nginx-temp
       mountPath: /var/cache/nginx
-  securityContext:
-    runAsUser: 1001
-    runAsGroup: 0
-    fsGroup: 1001
   volumes:
     - name: nginx-temp
       emptyDir: {}
