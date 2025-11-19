@@ -1,13 +1,18 @@
+serviceSelectorColor: blue   # ← change to "green" to flip all traffic instantly
+
+service:
+  type: NodePort
+  port: 80
+  nodePort: 30010
+
 blue:
   replicaCount: 4
   image:
     repository: eyesoncloud/web-app
     tag: v1
-  ingress:
-    enabled: false
   securityContext:
-    runAsUser: 1001
-    fsGroup: 1001
+    runAsUser: 1000680001      # OpenShift-safe random UID
+    fsGroup: 1000680001
   extraVolumeMounts:
     - name: nginx-temp
       mountPath: /var/cache/nginx
@@ -20,20 +25,12 @@ green:
   image:
     repository: eyesoncloud/web-app
     tag: v2
-  ingress:
-    enabled: false
   securityContext:
-    runAsUser: 1001
-    fsGroup: 1001
+    runAsUser: 1000680001
+    fsGroup: 1000680001
   extraVolumeMounts:
     - name: nginx-temp
       mountPath: /var/cache/nginx
   volumes:
     - name: nginx-temp
       emptyDir: {}
-
-serviceSelectorColor: blue
-service:
-  type: NodePort
-  nodePort: 30010
-  port: 80
