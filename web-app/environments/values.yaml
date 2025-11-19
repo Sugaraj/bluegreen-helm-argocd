@@ -1,4 +1,4 @@
-containerPort: 8080
+containerPort: 80
 
 serviceSelectorColor: green
 
@@ -24,4 +24,3 @@ green:
   volumes:
     - name: tmp-volume
       emptyDir: {}
-
