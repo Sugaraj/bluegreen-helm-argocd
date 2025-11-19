@@ -2,7 +2,7 @@ serviceSelectorColor: blue
 
 service:
   type: NodePort
-  port: 8080
+  port: 80
   nodePort: 30010
 
 blue:
@@ -10,11 +10,8 @@ blue:
   image:
     repository: eyesoncloud/web-app
     tag: v1
-  extraVolumeMounts:
-    - name: nginx-temp
-      mountPath: /var/cache/nginx
   volumes:
-    - name: nginx-temp
+    - name: tmp-volume
       emptyDir: {}
 
 green:
@@ -22,9 +19,6 @@ green:
   image:
     repository: eyesoncloud/web-app
     tag: v2
-  extraVolumeMounts:
-    - name: nginx-temp
-      mountPath: /var/cache/nginx
   volumes:
-    - name: nginx-temp
+    - name: tmp-volume
       emptyDir: {}
