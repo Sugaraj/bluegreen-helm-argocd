@@ -1,4 +1,4 @@
-serviceSelectorColor: blue
+serviceSelectorColor: green
 
 service:
   type: NodePort
