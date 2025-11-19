@@ -6,7 +6,6 @@ metadata:
   name: web-app-{{ $color }}
   labels:
     app: {{ $color }}-webserver
-  namespace: blue-green-app
 spec:
   replicas: {{ $config.replicaCount }}
   selector:
