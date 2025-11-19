@@ -20,9 +20,9 @@ spec:
         ver: {{ $color }}
     spec:
       securityContext:
+        runAsNonRoot: true
         runAsUser: {{ $config.securityContext.runAsUser | default 1000680001 }}
         fsGroup: {{ $config.securityContext.fsGroup | default 1000680001 }}
-        runAsNonRoot: true
       containers:
         - name: webserver-container
           image: "{{ $config.image.repository }}:{{ $config.image.tag }}"
@@ -42,17 +42,20 @@ spec:
               cpu: 200m
               memory: 256Mi
           volumeMounts:
-            # Your custom mounts from values.yaml
-            {{- toYaml ($config.extraVolumeMounts | default (dict)) | list)) | nindent 12 }}
-            # Always mount /var/run and /var/log too (critical for nginx)
+            {{- range $config.extraVolumeMounts }}
+            - name: {{ .name }}
+              mountPath: {{ .mountPath }}
+            {{- end }}
+            # Always mount these two critical paths
             - name: run-log
               mountPath: /var/run
             - name: run-log
               mountPath: /var/log/nginx
       volumes:
-        # Your custom volumes from values.yaml
-        {{- toYaml ($config.volumes | default (dict)) | nindent 8 }}
-        # Always provide this emptyDir for run/log
+        {{- range $config.volumes }}
+        - name: {{ .name }}
+          emptyDir: {}
+        {{- end }}
         - name: run-log
           emptyDir: {}
 {{- end }}
